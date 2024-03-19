@@ -1,13 +1,13 @@
-type CardProps = {
-	imgSrc: string | null
-}
+import { Item } from "../App"
 
-function Card({ imgSrc }: CardProps) {
+type CardProps = Item
+
+function Card({ path, title }: CardProps) {
 	return (
 		<div className="col mb-5">
 			<div className="card" style={{ width: "18rem" }}>
-				{imgSrc ? (
-					<img src={imgSrc} className="card-img-top" alt="image" />
+				{path ? (
+					<img src={path} className="card-img-top" alt={title || "image"} />
 				) : (
 					<div className="card-body">
 						<p className="card-text">No Image</p>

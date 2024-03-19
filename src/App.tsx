@@ -4,7 +4,7 @@ import Card from "./components/Card"
 import Navbar from "./components/Navbar"
 import UploadForm from "./components/UploadForm"
 
-type Item = {
+export type Item = {
 	title: string | null
 	file: File | null
 	path: string | null
@@ -118,8 +118,8 @@ function App() {
 				<h1 className="text-center">Gallery</h1>
 				{count}
 				<div className="row">
-					{state.items.map((photo, index) => (
-						<Card key={index} imgSrc={photo.path} />
+					{state.items.map((item, index) => (
+						<Card key={index} {...item} />
 					))}
 				</div>
 			</div>
