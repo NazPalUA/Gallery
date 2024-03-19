@@ -4,7 +4,7 @@ import Card from "./components/Card"
 import Navbar from "./components/Navbar"
 import UploadForm from "./components/UploadForm"
 
-type Input = {
+export type Inputs = {
 	title: string | null
 	file: File | null
 	path: string | null
@@ -21,7 +21,7 @@ const photos = [
 
 function App() {
 	const [count, setCount] = useState("")
-	const [inputs, setInputs] = useState<Input>({
+	const [inputs, setInputs] = useState<Inputs>({
 		title: null,
 		file: null,
 		path: null,
@@ -48,6 +48,8 @@ function App() {
 		e.preventDefault()
 		if (inputs.path !== null) {
 			setItems([inputs.path, ...items])
+			setInputs({ title: null, file: null, path: null })
+			collapse(false)
 		}
 	}
 
@@ -64,6 +66,7 @@ function App() {
 				</button>
 				<div className="clearfix mb-4"></div>
 				<UploadForm
+					inputs={inputs}
 					isVisible={isCollapsed}
 					onChange={handleOnChange}
 					onSubmit={handleOnSubmit}
