@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react"
+import { useMemo, useReducer } from "react"
 import "./App.css"
 import Card from "./components/Card"
 import Navbar from "./components/Navbar"
@@ -83,7 +83,6 @@ function reducer(state: State, action: Action): State {
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const [count, setCount] = useState("")
 
 	const toggle = (bool: boolean) =>
 		dispatch({ type: "collapse", payload: { bool } })
@@ -95,16 +94,14 @@ function App() {
 		toggle(!state.isCollapsed)
 	}
 
-	useEffect(() => {
-		setCount(
-			`you have ${state.items.length} image${state.items.length > 1 ? "s" : ""}`
-		)
-	}, [state.items])
+	const count = useMemo(() => {
+		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`
+	}, [state.count])
 
 	return (
 		<>
 			<Navbar />
-			<div className="container text-center mt-5">
+			<div className="container mt-5">
 				<button
 					className="btn btn-success float-end"
 					onClick={() => toggle(!state.isCollapsed)}
@@ -118,8 +115,8 @@ function App() {
 					onChange={handleOnChange}
 					onSubmit={handleOnSubmit}
 				/>
-				<h2>{count}</h2>
-				<h1>Gallery</h1>
+				<h1 className="text-center">Gallery</h1>
+				{count}
 				<div className="row">
 					{state.items.map((photo, index) => (
 						<Card key={index} imgSrc={photo.path} />
