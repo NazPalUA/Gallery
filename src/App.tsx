@@ -1,8 +1,7 @@
 import { useMemo, useReducer } from "react"
 import "./App.css"
 import Card from "./components/Card"
-import Navbar from "./components/Navbar"
-import UploadForm from "./components/UploadForm"
+import Layout from "./components/Layout"
 
 export type Item = {
 	title: string | null
@@ -16,7 +15,7 @@ export type Inputs = {
 	path: string | null
 }
 
-type State = {
+export type State = {
 	inputs: Inputs
 	items: Item[]
 	isCollapsed: boolean
@@ -99,31 +98,20 @@ function App() {
 	}, [state.count])
 
 	return (
-		<>
-			<Navbar />
-			<div className="container mt-5">
-				<button
-					className="btn btn-success float-end"
-					onClick={() => toggle(!state.isCollapsed)}
-				>
-					{state.isCollapsed ? "Close" : "+ Add"}
-				</button>
-				<div className="clearfix mb-4"></div>
-				<UploadForm
-					inputs={state.inputs}
-					isVisible={state.isCollapsed}
-					onChange={handleOnChange}
-					onSubmit={handleOnSubmit}
-				/>
-				<h1 className="text-center">Gallery</h1>
-				{count}
-				<div className="row">
-					{state.items.map((item, index) => (
-						<Card key={index} {...item} />
-					))}
-				</div>
+		<Layout
+			state={state}
+			onChange={handleOnChange}
+			onSubmit={handleOnSubmit}
+			toggle={toggle}
+		>
+			<h1 className="text-center">Gallery</h1>
+			{count}
+			<div className="row">
+				{state.items.map((item, index) => (
+					<Card key={index} {...item} />
+				))}
 			</div>
-		</>
+		</Layout>
 	)
 }
 
