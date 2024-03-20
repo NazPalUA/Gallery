@@ -1,22 +1,15 @@
-import { State } from "../App"
+import { useAppContext } from "../context"
 import Navbar from "./Navbar"
 import UploadForm from "./UploadForm"
 
 type LayoutProps = {
 	children: React.ReactNode
-	state: State
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-	toggle: (bool: boolean) => void
 }
 
-export default function Layout({
-	children,
-	state,
-	onChange,
-	onSubmit,
-	toggle,
-}: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
+	const { state, dispatch } = useAppContext()
+	const toggle = (bool: boolean) =>
+		dispatch({ type: "collapse", payload: { bool } })
 	return (
 		<>
 			<Navbar />
@@ -28,12 +21,7 @@ export default function Layout({
 					{state.isCollapsed ? "Close" : "+ Add"}
 				</button>
 				<div className="clearfix mb-4"></div>
-				<UploadForm
-					inputs={state.inputs}
-					isVisible={state.isCollapsed}
-					onChange={onChange}
-					onSubmit={onSubmit}
-				/>
+				<UploadForm />
 				{children}
 			</div>
 		</>

@@ -1,14 +1,8 @@
 import { useMemo } from "react"
-import { Inputs } from "../App"
+import { useAppContext } from "../context"
 
-type UploadFormProps = {
-	isVisible: boolean
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-	inputs: Inputs
-}
-
-const Preview = ({ path }: Inputs) => {
+const Preview = () => {
+	const { path } = useAppContext().state.inputs
 	return (
 		path && (
 			<div
@@ -24,26 +18,32 @@ const Preview = ({ path }: Inputs) => {
 	)
 }
 
-const UploadForm = ({
-	inputs,
-	isVisible,
-	onChange,
-	onSubmit,
-}: UploadFormProps) => {
+const UploadForm = () => {
+	const { state, dispatch } = useAppContext()
+
+	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+		dispatch({ type: "setInputs", payload: { value: e } })
+
+	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		dispatch({ type: "setItem" })
+		dispatch({ type: "collapse", payload: { bool: false } })
+	}
+
 	const isDisabled = useMemo(() => {
-		return !!Object.values(inputs).some(input => !input)
-	}, [inputs])
+		return !!Object.values(state.inputs).some(input => !input)
+	}, [state.inputs])
 
 	return (
-		isVisible && (
+		state.isCollapsed && (
 			<>
 				<p className="display-6 text-center mb-3">Upload Stock Image</p>
 				<div className="mb-5 d-flex align-items-center justify-content-center">
-					<Preview {...inputs} />
+					<Preview />
 					<form
 						className="mb-2"
 						style={{ textAlign: "left" }}
-						onSubmit={onSubmit}
+						onSubmit={handleOnSubmit}
 					>
 						<div className="mb-3">
 							<input
@@ -52,7 +52,7 @@ const UploadForm = ({
 								name="title"
 								placeholder="title"
 								aria-describedby="text"
-								onChange={onChange}
+								onChange={handleOnChange}
 							/>
 						</div>
 						<div className="mb-3">
@@ -60,7 +60,7 @@ const UploadForm = ({
 								type="file"
 								className="form-control"
 								name="file"
-								onChange={onChange}
+								onChange={handleOnChange}
 							/>
 						</div>
 						<button

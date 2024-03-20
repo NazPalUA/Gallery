@@ -17,29 +17,14 @@ export type Inputs = {
 }
 
 function App() {
-	const { state, dispatch } = useAppContext()
-
-	const toggle = (bool: boolean) =>
-		dispatch({ type: "collapse", payload: { bool } })
-	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-		dispatch({ type: "setInputs", payload: { value: e } })
-	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		dispatch({ type: "setItem" })
-		toggle(!state.isCollapsed)
-	}
+	const { state } = useAppContext()
 
 	const count = useMemo(() => {
 		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`
 	}, [state.count])
 
 	return (
-		<Layout
-			state={state}
-			onChange={handleOnChange}
-			onSubmit={handleOnSubmit}
-			toggle={toggle}
-		>
+		<Layout>
 			<h1 className="text-center">Gallery</h1>
 			{count}
 			<div className="row">
