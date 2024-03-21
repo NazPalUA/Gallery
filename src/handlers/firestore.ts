@@ -1,4 +1,5 @@
 import {
+	FieldValue,
 	collection,
 	doc,
 	getDocs,
@@ -13,9 +14,9 @@ type Inputs = {
 }
 
 type Doc = {
-	title: string
-	path: string
-	createdAt: string
+	title: string | null
+	path: string | null
+	createdAt: FieldValue | null
 }
 
 const Firestore = {
@@ -35,19 +36,18 @@ const Firestore = {
 		}
 	},
 
-	writeDoc: async (
-		inputs: Inputs,
-		collection_name: string
-	): Promise<string> => {
+	writeDoc: async (inputs: Inputs, collection_name: string): Promise<Doc> => {
 		const randomIndex = Math.floor(Math.random() * 1000000)
 		try {
 			const docRef = doc(db, collection_name, `${randomIndex}`)
-			await setDoc(docRef, {
+			const newDoc = {
 				title: inputs.title,
 				path: inputs.path,
 				createdAt: serverTimestamp(),
-			})
-			return "Document successfully written!"
+			}
+			await setDoc(docRef, newDoc)
+			console.log("Document successfully written!")
+			return newDoc
 		} catch (e) {
 			console.error("Error adding document: ", e)
 			throw e
