@@ -1,4 +1,5 @@
-import { useMemo } from "react"
+import { FieldValue } from "firebase/firestore"
+import { useEffect, useMemo } from "react"
 import "./App.css"
 import Card from "./components/Card"
 import Layout from "./components/Layout"
@@ -6,8 +7,9 @@ import { useAppContext } from "./context"
 
 export type Item = {
 	title: string | null
-	file: File | null
+	file?: File | null
 	path: string | null
+	createdAt: FieldValue | null
 }
 
 export type Inputs = {
@@ -17,11 +19,15 @@ export type Inputs = {
 }
 
 function App() {
-	const { state } = useAppContext()
+	const { state, read } = useAppContext()
 
 	const count = useMemo(() => {
 		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`
 	}, [state.count])
+
+	useEffect(() => {
+		read()
+	}, [])
 
 	return (
 		<Layout>
