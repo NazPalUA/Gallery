@@ -1,5 +1,8 @@
 import { useMemo } from "react"
 import { useAppContext } from "../context"
+import Firestore from "../handlers/firestore"
+
+const { writeDoc } = Firestore
 
 const Preview = () => {
 	const { path } = useAppContext().state.inputs
@@ -26,6 +29,7 @@ const UploadForm = () => {
 
 	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		writeDoc(state.inputs, "stocks").then(console.log)
 		dispatch({ type: "setItem" })
 		dispatch({ type: "collapse", payload: { bool: false } })
 	}
