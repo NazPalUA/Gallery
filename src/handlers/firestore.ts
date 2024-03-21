@@ -1,4 +1,10 @@
-import { doc, serverTimestamp, setDoc } from "firebase/firestore"
+import {
+	collection,
+	doc,
+	getDocs,
+	serverTimestamp,
+	setDoc,
+} from "firebase/firestore"
 import { db } from "../lib/firebase.config"
 
 type Inputs = {
@@ -6,7 +12,29 @@ type Inputs = {
 	path: string | null
 }
 
+type Doc = {
+	title: string
+	path: string
+	createdAt: string
+}
+
 const Firestore = {
+	readDocs: async (collection_name: string) => {
+		const docs: Doc[] = []
+		const ref = collection(db, collection_name)
+		try {
+			const snapshot = await getDocs(ref)
+			snapshot.forEach(doc => {
+				const data = doc.data() as Doc
+				docs.push(data)
+			})
+			return docs
+		} catch (e) {
+			console.error("Error reading documents: ", e)
+			throw e
+		}
+	},
+
 	writeDoc: async (
 		inputs: Inputs,
 		collection_name: string
