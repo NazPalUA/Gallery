@@ -17,7 +17,7 @@ const Firestore = {
 			await setDoc(docRef, {
 				title: inputs.title,
 				path: inputs.path,
-				createdAt: serverTimestamp,
+				createdAt: serverTimestamp(),
 			})
 			return "Document successfully written!"
 		} catch (e) {
