@@ -1,22 +1,8 @@
-import { FieldValue } from "firebase/firestore"
 import { useEffect, useMemo } from "react"
 import "./App.css"
 import Card from "./components/Card"
 import Layout from "./components/Layout"
 import { useAppContext } from "./context"
-
-export type Item = {
-	title: string | null
-	file?: File | null
-	path: string | null
-	createdAt: FieldValue | null
-}
-
-export type Inputs = {
-	title: string | null
-	file: File | null
-	path: string | null
-}
 
 function App() {
 	const { state, read } = useAppContext()

@@ -1,5 +1,4 @@
 import {
-	FieldValue,
 	collection,
 	doc,
 	getDocs,
@@ -7,26 +6,16 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { db } from "../lib/firebase.config"
-
-type Inputs = {
-	title: string | null
-	path: string | null
-}
-
-type Doc = {
-	title: string | null
-	path: string | null
-	createdAt: FieldValue | null
-}
+import { Inputs, Item } from "../types"
 
 const Firestore = {
 	readDocs: async (collection_name: string) => {
-		const docs: Doc[] = []
+		const docs: Item[] = []
 		const ref = collection(db, collection_name)
 		try {
 			const snapshot = await getDocs(ref)
 			snapshot.forEach(doc => {
-				const data = doc.data() as Doc
+				const data = doc.data() as Item
 				docs.push(data)
 			})
 			return docs
@@ -36,7 +25,7 @@ const Firestore = {
 		}
 	},
 
-	writeDoc: async (inputs: Inputs, collection_name: string): Promise<Doc> => {
+	writeDoc: async (inputs: Inputs, collection_name: string): Promise<Item> => {
 		const randomIndex = Math.floor(Math.random() * 1000000)
 		try {
 			const docRef = doc(db, collection_name, `${randomIndex}`)

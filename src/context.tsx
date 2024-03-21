@@ -1,13 +1,6 @@
 import { Dispatch, createContext, useContext, useReducer } from "react"
-import { Inputs, Item } from "./App"
 import Firestore from "./handlers/firestore"
-
-export type State = {
-	inputs: Inputs
-	items: Item[]
-	isCollapsed: boolean
-	count: number
-}
+import { Item, State } from "./types"
 
 type Value = React.ChangeEvent<HTMLInputElement>
 type Action =

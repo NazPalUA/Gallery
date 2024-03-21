@@ -1,4 +1,4 @@
-import { Item } from "../App"
+import { Item } from "../types"
 
 type CardProps = Item
 
