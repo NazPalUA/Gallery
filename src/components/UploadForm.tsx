@@ -29,9 +29,10 @@ const UploadForm = () => {
 
 	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		writeDoc(state.inputs, "stocks").then(console.log)
-		dispatch({ type: "setItem" })
-		dispatch({ type: "collapse", payload: { bool: false } })
+		writeDoc(state.inputs, "stocks").then(data => {
+			dispatch({ type: "setItem", payload: { item: { ...data, file: null } } })
+			dispatch({ type: "collapse", payload: { bool: false } })
+		})
 	}
 
 	const isDisabled = useMemo(() => {
