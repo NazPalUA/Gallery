@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { auth } from "../lib/firebase.config"
 
 const provider = new GoogleAuthProvider()
@@ -17,7 +17,7 @@ const FirebaseAuth = {
 	},
 	signOut: async () => {
 		try {
-			await auth.signOut()
+			await signOut(auth)
 			console.log("User signed out successfully!")
 		} catch (e) {
 			console.error("Error signing out: ", e)
