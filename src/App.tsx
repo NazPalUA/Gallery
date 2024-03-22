@@ -1,11 +1,15 @@
+import { onAuthStateChanged } from "firebase/auth"
 import { useEffect, useMemo } from "react"
 import "./App.css"
 import Card from "./components/Card"
 import Layout from "./components/Layout"
+import { useAuthContext } from "./context/AuthContext"
 import { useFirestoreContext } from "./context/FirestoreContext"
+import { auth } from "./lib/firebase.config"
 
 function App() {
 	const { state, read } = useFirestoreContext()
+	const { authenticate } = useAuthContext()
 
 	const count = useMemo(() => {
 		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`
@@ -13,6 +17,14 @@ function App() {
 
 	useEffect(() => {
 		read()
+		onAuthStateChanged(auth, user => {
+			if (user) {
+				authenticate(user)
+				console.log("User is signed in")
+			} else {
+				console.log("User is signed out")
+			}
+		})
 	}, [])
 
 	return (

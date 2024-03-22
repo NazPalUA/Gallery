@@ -24,9 +24,6 @@ const FirebaseAuth = {
 			throw e
 		}
 	},
-	getCurrentUser: () => {
-		return auth.currentUser
-	},
 }
 
 export default FirebaseAuth
