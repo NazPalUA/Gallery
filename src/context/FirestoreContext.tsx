@@ -1,6 +1,6 @@
 import { Dispatch, createContext, useContext, useReducer } from "react"
-import Firestore from "./handlers/firestore"
-import { Item, State } from "./types"
+import Firestore from "../handlers/firestore"
+import { Item, State } from "../types"
 
 type Value = React.ChangeEvent<HTMLInputElement>
 type Action =
@@ -89,12 +89,14 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-function useAppContext() {
+function useFirestoreContext() {
 	const context = useContext(Context)
 	if (context === null) {
-		throw new Error("useAppContext must be used within a Context.Provider")
+		throw new Error(
+			"useFirestoreContext must be used within a Context.Provider"
+		)
 	}
 	return context
 }
 
-export { Provider, useAppContext }
+export { Provider, useFirestoreContext }

@@ -2,10 +2,10 @@ import { useEffect, useMemo } from "react"
 import "./App.css"
 import Card from "./components/Card"
 import Layout from "./components/Layout"
-import { useAppContext } from "./context"
+import { useFirestoreContext } from "./context/FirestoreContext"
 
 function App() {
-	const { state, read } = useAppContext()
+	const { state, read } = useFirestoreContext()
 
 	const count = useMemo(() => {
 		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`

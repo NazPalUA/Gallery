@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useAppContext } from "../context"
+import { useFirestoreContext } from "../context/FirestoreContext"
 import Firestore from "../handlers/firestore"
 import Storage from "../handlers/storage"
 
@@ -7,7 +7,7 @@ const { writeDoc } = Firestore
 const { uploadFile, downloadFile } = Storage
 
 const Preview = () => {
-	const { path } = useAppContext().state.inputs
+	const { path } = useFirestoreContext().state.inputs
 	return (
 		path && (
 			<div
@@ -24,7 +24,7 @@ const Preview = () => {
 }
 
 const UploadForm = () => {
-	const { state, dispatch } = useAppContext()
+	const { state, dispatch } = useFirestoreContext()
 
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		dispatch({ type: "setInputs", payload: { value: e } })

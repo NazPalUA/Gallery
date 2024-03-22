@@ -1,4 +1,4 @@
-import { useAppContext } from "../context"
+import { useFirestoreContext } from "../context/FirestoreContext"
 import Navbar from "./Navbar"
 import UploadForm from "./UploadForm"
 
@@ -7,7 +7,7 @@ type LayoutProps = {
 }
 
 export default function Layout({ children }: LayoutProps) {
-	const { state, dispatch } = useAppContext()
+	const { state, dispatch } = useFirestoreContext()
 	const toggle = (bool: boolean) =>
 		dispatch({ type: "collapse", payload: { bool } })
 	return (
