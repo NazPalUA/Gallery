@@ -1,8 +1,10 @@
 import { useMemo } from "react"
 import { useAppContext } from "../context"
 import Firestore from "../handlers/firestore"
+import Storage from "../handlers/storage"
 
 const { writeDoc } = Firestore
+const { uploadFile, downloadFile } = Storage
 
 const Preview = () => {
 	const { path } = useAppContext().state.inputs
@@ -29,8 +31,14 @@ const UploadForm = () => {
 
 	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		writeDoc(state.inputs, "stocks").then(data => {
-			dispatch({ type: "setItem", payload: { item: { ...data, file: null } } })
+		uploadFile(state.inputs.file, state.inputs.title).then(async data => {
+			if (!data) return
+			const url = await downloadFile(data.path)
+			const newDoc = await writeDoc({ ...state.inputs, path: url }, "stocks")
+			dispatch({
+				type: "setItem",
+				payload: { item: { ...newDoc, file: null } },
+			})
 			dispatch({ type: "collapse", payload: { bool: false } })
 		})
 	}
