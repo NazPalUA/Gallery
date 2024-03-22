@@ -1,3 +1,6 @@
+import LogIn from "./LogIn"
+import LogOut from "./LogOut"
+
 export default function Dropdown() {
 	return (
 		<ul className="navbar-nav mb-2 mb-lg-0">
@@ -14,11 +17,22 @@ export default function Dropdown() {
 				>
 					Login
 				</a>
-				<ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+				<ul
+					className="dropdown-menu"
+					aria-labelledby="navbarDropdown"
+					style={{ right: "0", left: "auto" }}
+				>
 					<li>
 						<a className="dropdown-item text-center" href="#">
 							Profile
 						</a>
+					</li>
+					<li>
+						<hr className="dropdown divider" />
+					</li>
+					<li className="d-flex justify-content-center">
+						<LogIn />
+						<LogOut />
 					</li>
 				</ul>
 			</li>
