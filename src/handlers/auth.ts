@@ -15,6 +15,18 @@ const FirebaseAuth = {
 			throw e
 		}
 	},
+	signOut: async () => {
+		try {
+			await auth.signOut()
+			console.log("User signed out successfully!")
+		} catch (e) {
+			console.error("Error signing out: ", e)
+			throw e
+		}
+	},
+	getCurrentUser: () => {
+		return auth.currentUser
+	},
 }
 
 export default FirebaseAuth
