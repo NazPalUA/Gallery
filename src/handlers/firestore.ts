@@ -1,4 +1,5 @@
 import {
+	Timestamp,
 	collection,
 	doc,
 	getDocs,
@@ -33,10 +34,11 @@ const Firestore = {
 				title: inputs.title,
 				path: inputs.path,
 				createdAt: serverTimestamp(),
+				username: inputs.username,
 			}
 			await setDoc(docRef, newDoc)
 			console.log("Document successfully written!")
-			return newDoc
+			return { ...newDoc, createdAt: Timestamp.fromDate(new Date()) }
 		} catch (e) {
 			console.error("Error adding document: ", e)
 			throw e

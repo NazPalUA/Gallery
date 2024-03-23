@@ -16,6 +16,7 @@ const initialState: State = {
 		title: null,
 		file: null,
 		path: null,
+		username: "anonymous",
 	},
 	items: [],
 	isCollapsed: false,
@@ -51,6 +52,7 @@ function reducer(state: State, action: Action): State {
 					title: null,
 					file: null,
 					path: null,
+					username: "anonymous",
 				},
 			}
 		case "setItems":
