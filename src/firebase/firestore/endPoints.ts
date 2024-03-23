@@ -1,5 +1,4 @@
 import {
-	Timestamp,
 	collection,
 	doc,
 	getDocs,
@@ -7,7 +6,7 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { nanoid } from "nanoid"
-import { StockItem, StockUploadInputs } from "../../types"
+import { StockItem } from "../../types"
 import { db } from "../firebase.config"
 
 const stocksCollection = collection(db, "stocks")
@@ -20,13 +19,13 @@ export const getStocks = async () => {
 		return stocksSnapshot.docs.map(doc => doc.data()) as StockItem[]
 	})
 }
-
 // MUTATIONS:
-export const addStock = async ({
-	title,
-	path,
-	username,
-}: StockUploadInputs) => {
+type AddStockInputs = {
+	title: string
+	path: string
+	username: string
+}
+export const addStock = async ({ title, path, username }: AddStockInputs) => {
 	const stockId = nanoid()
 	const newStock = {
 		title: title,
@@ -34,8 +33,5 @@ export const addStock = async ({
 		createdAt: serverTimestamp(),
 		username: username,
 	}
-	return setDoc(stockRef(stockId), newStock).then(() => ({
-		...newStock,
-		createdAt: Timestamp.fromDate(new Date()),
-	}))
+	return setDoc(stockRef(stockId), newStock)
 }

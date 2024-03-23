@@ -1,24 +1,28 @@
 import { Dispatch, createContext, useContext, useReducer } from "react"
-import Firestore from "../handlers/firestore"
-import { State, StockItem } from "../types"
 
 type Value = React.ChangeEvent<HTMLInputElement>
 type Action =
-	| { type: "setItem"; payload: { item: StockItem } }
-	| { type: "setItems"; payload: { items: StockItem[] } }
 	| { type: "collapse"; payload: { bool: boolean } }
 	| { type: "setInputs"; payload: { value: Value } }
 
-const { readDocs } = Firestore
+type Inputs = {
+	title: string | null
+	file: File | null
+	path: string | null
+}
+
+type State = {
+	inputs: Inputs
+	isCollapsed: boolean
+	count: number
+}
 
 const initialState: State = {
 	inputs: {
 		title: null,
 		file: null,
 		path: null,
-		username: "anonymous",
 	},
-	items: [],
 	isCollapsed: false,
 	count: 0,
 }
@@ -43,24 +47,6 @@ const handleOnChange = (
 
 function reducer(state: State, action: Action): State {
 	switch (action.type) {
-		case "setItem":
-			return {
-				...state,
-				items: [...state.items, action.payload.item],
-				count: state.items.length + 1,
-				inputs: {
-					title: null,
-					file: null,
-					path: null,
-					username: "anonymous",
-				},
-			}
-		case "setItems":
-			return {
-				...state,
-				items: action.payload.items,
-				count: action.payload.items.length,
-			}
 		case "setInputs":
 			return { ...state, inputs: handleOnChange(state, action.payload.value) }
 
@@ -74,20 +60,13 @@ function reducer(state: State, action: Action): State {
 type ContextType = {
 	state: State
 	dispatch: Dispatch<Action>
-	read: () => void
 }
 
 const Context = createContext<ContextType | null>(null)
 const Provider = ({ children }: { children: React.ReactNode }) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const read = async () => {
-		const items = await readDocs("stocks")
-		dispatch({ type: "setItems", payload: { items } })
-	}
 	return (
-		<Context.Provider value={{ state, dispatch, read }}>
-			{children}
-		</Context.Provider>
+		<Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
 	)
 }
 

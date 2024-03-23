@@ -6,9 +6,10 @@ import Card from "./components/UI/Card"
 import { useAuthContext } from "./context/AuthContext"
 import { useFirestoreContext } from "./context/FirestoreContext"
 import { auth } from "./firebase/firebase.config"
+import { useGetStocksQuery } from "./firebase/firestore/queries"
 
 function App() {
-	const { state, read } = useFirestoreContext()
+	const { state } = useFirestoreContext()
 	const { authenticate } = useAuthContext()
 
 	const count = useMemo(() => {
@@ -16,7 +17,6 @@ function App() {
 	}, [state.count])
 
 	useEffect(() => {
-		read()
 		onAuthStateChanged(auth, user => {
 			if (user) {
 				authenticate(user)
@@ -27,12 +27,14 @@ function App() {
 		})
 	}, [])
 
+	const { data } = useGetStocksQuery()
+
 	return (
 		<Layout>
 			<h1 className="text-center">Gallery</h1>
 			{count}
 			<div className="row">
-				{state.items.map((item, index) => (
+				{data?.map((item, index) => (
 					<Card key={index} {...item} />
 				))}
 			</div>
