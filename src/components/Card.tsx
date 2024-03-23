@@ -1,17 +1,10 @@
-import { Timestamp } from "firebase/firestore"
-import { useMemo } from "react"
 import { Item } from "../types"
+import { getDateFromTimestamp } from "../utils/getDateFromTimestamp"
 
 type CardProps = Item
 
-function Card({ path, title, createdAt }: CardProps) {
-	const timestamp = useMemo(() => {
-		if (!createdAt) return
-		const date = `${new Date((createdAt as Timestamp).seconds * 1000)}`.split(
-			" "
-		)
-		return `${date[1]} ${date[2]}, ${date[3]}`
-	}, [])
+function Card({ path, title, createdAt, username }: CardProps) {
+	const timestamp = getDateFromTimestamp(createdAt)
 
 	return (
 		<div className="col mb-5">
@@ -28,7 +21,7 @@ function Card({ path, title, createdAt }: CardProps) {
 				<h5 className="text-center mt-1">{title}</h5>
 				<div className="d-flex justify-content-between p-2">
 					<p>{timestamp}</p>
-					<i>@username</i>
+					<i>@{username}</i>
 				</div>
 			</div>
 		</div>

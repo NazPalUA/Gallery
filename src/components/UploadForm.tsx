@@ -1,13 +1,16 @@
 import { useMemo } from "react"
+import { useAuthContext } from "../context/AuthContext"
 import { useFirestoreContext } from "../context/FirestoreContext"
 import Firestore from "../handlers/firestore"
 import Storage from "../handlers/storage"
+import { getUsername } from "../utils/getUsername"
 
 const { writeDoc } = Firestore
 const { uploadFile, downloadFile } = Storage
 
 const Preview = () => {
 	const { path } = useFirestoreContext().state.inputs
+
 	return (
 		path && (
 			<div
@@ -25,6 +28,7 @@ const Preview = () => {
 
 const UploadForm = () => {
 	const { state, dispatch } = useFirestoreContext()
+	const { currentUser } = useAuthContext()
 
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		dispatch({ type: "setInputs", payload: { value: e } })
@@ -34,7 +38,12 @@ const UploadForm = () => {
 		uploadFile(state.inputs.file, state.inputs.title).then(async data => {
 			if (!data) return
 			const url = await downloadFile(data.path)
-			const newDoc = await writeDoc({ ...state.inputs, path: url }, "stocks")
+			const newDoc = await writeDoc(
+				{ ...state.inputs, path: url, username: getUsername(currentUser) },
+				"stocks"
+			)
+			console.log(newDoc)
+
 			dispatch({
 				type: "setItem",
 				payload: { item: { ...newDoc, file: null } },
