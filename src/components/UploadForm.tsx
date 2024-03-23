@@ -27,7 +27,7 @@ const Preview = () => {
 }
 
 const UploadForm = () => {
-	const { state, dispatch } = useFirestoreContext()
+	const { state, dispatch, read } = useFirestoreContext()
 	const { currentUser } = useAuthContext()
 
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -48,6 +48,7 @@ const UploadForm = () => {
 				type: "setItem",
 				payload: { item: { ...newDoc, file: null } },
 			})
+			read()
 			dispatch({ type: "collapse", payload: { bool: false } })
 		})
 	}
