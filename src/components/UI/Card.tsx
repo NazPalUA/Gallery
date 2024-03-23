@@ -1,5 +1,5 @@
-import { Item } from "../types"
-import { getDateFromTimestamp } from "../utils/getDateFromTimestamp"
+import { Item } from "../../types"
+import { getDateFromTimestamp } from "../../utils/getDateFromTimestamp"
 
 type CardProps = Item
 
