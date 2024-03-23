@@ -2,26 +2,13 @@ import { useMemo } from "react"
 import { useAuthContext } from "../context/AuthContext"
 import LogIn from "./LogIn"
 import LogOut from "./LogOut"
+import Avatar from "./UI/Avatar"
 
 export default function Dropdown() {
 	const { currentUser } = useAuthContext()
 
 	const username = useMemo(() => {
 		return currentUser?.displayName || "Profile"
-	}, [currentUser])
-
-	const avatar = useMemo(() => {
-		return currentUser?.photoURL ? (
-			<img
-				src={currentUser.photoURL}
-				alt={username}
-				className="rounded-circle"
-				width="34"
-				height="34"
-			/>
-		) : (
-			"Login"
-		)
 	}, [currentUser])
 
 	return (
@@ -37,7 +24,7 @@ export default function Dropdown() {
 					data-bs-toggle="dropdown"
 					aria-expanded="false"
 				>
-					{avatar}
+					<Avatar url={currentUser?.photoURL || null} />
 				</a>
 				<ul
 					className="dropdown-menu"
