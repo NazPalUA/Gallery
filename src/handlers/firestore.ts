@@ -6,7 +6,7 @@ import {
 	serverTimestamp,
 	setDoc,
 } from "firebase/firestore"
-import { db } from "../lib/firebase.config"
+import { db } from "../firebase/firebase.config"
 import { Inputs, Item } from "../types"
 
 const Firestore = {

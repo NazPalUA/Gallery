@@ -5,7 +5,7 @@ import Layout from "./components/Layout"
 import Card from "./components/UI/Card"
 import { useAuthContext } from "./context/AuthContext"
 import { useFirestoreContext } from "./context/FirestoreContext"
-import { auth } from "./lib/firebase.config"
+import { auth } from "./firebase/firebase.config"
 
 function App() {
 	const { state, read } = useFirestoreContext()
