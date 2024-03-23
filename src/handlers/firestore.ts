@@ -7,16 +7,16 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { db } from "../firebase/firebase.config"
-import { Inputs, Item } from "../types"
+import { Inputs, StockItem } from "../types"
 
 const Firestore = {
 	readDocs: async (collection_name: string) => {
-		const docs: Item[] = []
+		const docs: StockItem[] = []
 		const ref = collection(db, collection_name)
 		try {
 			const snapshot = await getDocs(ref)
 			snapshot.forEach(doc => {
-				const data = doc.data() as Item
+				const data = doc.data() as StockItem
 				docs.push(data)
 			})
 			return docs
@@ -26,7 +26,10 @@ const Firestore = {
 		}
 	},
 
-	writeDoc: async (inputs: Inputs, collection_name: string): Promise<Item> => {
+	writeDoc: async (
+		inputs: Inputs,
+		collection_name: string
+	): Promise<StockItem> => {
 		const randomIndex = Math.floor(Math.random() * 1000000)
 		try {
 			const docRef = doc(db, collection_name, `${randomIndex}`)

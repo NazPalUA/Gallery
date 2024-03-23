@@ -1,6 +1,6 @@
 import { FieldValue } from "firebase/firestore"
 
-export type Item = {
+export type StockItem = {
 	title: string | null
 	file?: File | null
 	path: string | null
@@ -17,7 +17,7 @@ export type Inputs = {
 
 export type State = {
 	inputs: Inputs
-	items: Item[]
+	items: StockItem[]
 	isCollapsed: boolean
 	count: number
 }

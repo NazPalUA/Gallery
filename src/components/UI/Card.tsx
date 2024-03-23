@@ -1,7 +1,7 @@
-import { Item } from "../../types"
+import { StockItem } from "../../types"
 import { getDateFromTimestamp } from "../../utils/getDateFromTimestamp"
 
-type CardProps = Item
+type CardProps = StockItem
 
 function Card({ path, title, createdAt, username }: CardProps) {
 	const timestamp = getDateFromTimestamp(createdAt)

@@ -7,7 +7,7 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { nanoid } from "nanoid"
-import { Inputs, Item } from "../../types"
+import { Inputs, StockItem } from "../../types"
 import { db } from "../firebase.config"
 
 const stocksCollection = collection(db, "stocks")
@@ -17,7 +17,7 @@ const stockRef = (id: string) => doc(db, `stocks/${id}`)
 // QUERIES:
 export const getStocks = async () => {
 	return getDocs(stocksCollection).then(stocksSnapshot => {
-		return stocksSnapshot.docs.map(doc => doc.data()) as Item[]
+		return stocksSnapshot.docs.map(doc => doc.data()) as StockItem[]
 	})
 }
 

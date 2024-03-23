@@ -1,11 +1,11 @@
 import { Dispatch, createContext, useContext, useReducer } from "react"
 import Firestore from "../handlers/firestore"
-import { Item, State } from "../types"
+import { State, StockItem } from "../types"
 
 type Value = React.ChangeEvent<HTMLInputElement>
 type Action =
-	| { type: "setItem"; payload: { item: Item } }
-	| { type: "setItems"; payload: { items: Item[] } }
+	| { type: "setItem"; payload: { item: StockItem } }
+	| { type: "setItems"; payload: { items: StockItem[] } }
 	| { type: "collapse"; payload: { bool: boolean } }
 	| { type: "setInputs"; payload: { value: Value } }
 
