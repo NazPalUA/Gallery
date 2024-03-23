@@ -7,7 +7,7 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { db } from "../firebase/firebase.config"
-import { Inputs, StockItem } from "../types"
+import { StockItem, StockUploadInputs } from "../types"
 
 const Firestore = {
 	readDocs: async (collection_name: string) => {
@@ -27,7 +27,7 @@ const Firestore = {
 	},
 
 	writeDoc: async (
-		inputs: Inputs,
+		inputs: StockUploadInputs,
 		collection_name: string
 	): Promise<StockItem> => {
 		const randomIndex = Math.floor(Math.random() * 1000000)

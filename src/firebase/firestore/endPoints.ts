@@ -7,7 +7,7 @@ import {
 	setDoc,
 } from "firebase/firestore"
 import { nanoid } from "nanoid"
-import { Inputs, StockItem } from "../../types"
+import { StockItem, StockUploadInputs } from "../../types"
 import { db } from "../firebase.config"
 
 const stocksCollection = collection(db, "stocks")
@@ -22,7 +22,11 @@ export const getStocks = async () => {
 }
 
 // MUTATIONS:
-export const addStock = async ({ title, path, username }: Inputs) => {
+export const addStock = async ({
+	title,
+	path,
+	username,
+}: StockUploadInputs) => {
 	const stockId = nanoid()
 	const newStock = {
 		title: title,

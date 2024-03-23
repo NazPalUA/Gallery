@@ -8,7 +8,7 @@ export type StockItem = {
 	username: string | null
 }
 
-export type Inputs = {
+export type StockUploadInputs = {
 	title: string | null
 	file?: File | null
 	path: string | null
@@ -16,7 +16,7 @@ export type Inputs = {
 }
 
 export type State = {
-	inputs: Inputs
+	inputs: StockUploadInputs
 	items: StockItem[]
 	isCollapsed: boolean
 	count: number
