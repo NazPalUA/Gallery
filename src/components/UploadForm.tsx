@@ -2,12 +2,14 @@ import { useMemo } from "react"
 import { useFirestoreContext } from "../context/FirestoreContext"
 import { useCreateStockMutation } from "../firebase/firestore/mutations"
 import Storage from "../handlers/storage"
+import useStore from "../store"
 import Preview from "./UI/Preview"
 
 const { uploadFile, downloadFile } = Storage
 
 const UploadForm = () => {
 	const { state, dispatch } = useFirestoreContext()
+	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useStore()
 
 	const { mutate } = useCreateStockMutation()
 
@@ -20,7 +22,7 @@ const UploadForm = () => {
 			if (!data) return
 			const url = await downloadFile(data.path)
 			mutate({ path: url, title: state.inputs.title || "" })
-			dispatch({ type: "collapse", payload: { bool: false } })
+			setIsUploadFormCollapsed(false)
 		})
 	}
 
@@ -31,7 +33,7 @@ const UploadForm = () => {
 	const { path: inputImgSrc } = useFirestoreContext().state.inputs
 
 	return (
-		state.isCollapsed && (
+		isUploadFormCollapsed && (
 			<>
 				<p className="display-6 text-center mb-3">Upload Stock Image</p>
 				<div className="mb-5 d-flex align-items-center justify-content-center">

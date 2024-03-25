@@ -1,4 +1,4 @@
-import { useFirestoreContext } from "../context/FirestoreContext"
+import useStore from "../store"
 import Navbar from "./Navbar"
 import UploadForm from "./UploadForm"
 
@@ -7,18 +7,18 @@ type LayoutProps = {
 }
 
 export default function Layout({ children }: LayoutProps) {
-	const { state, dispatch } = useFirestoreContext()
-	const toggle = (bool: boolean) =>
-		dispatch({ type: "collapse", payload: { bool } })
+	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useStore()
+
+	const toggle = (bool: boolean) => setIsUploadFormCollapsed(bool)
 	return (
 		<>
 			<Navbar />
 			<div className="container mt-5">
 				<button
 					className="btn btn-success float-end"
-					onClick={() => toggle(!state.isCollapsed)}
+					onClick={() => toggle(!isUploadFormCollapsed)}
 				>
-					{state.isCollapsed ? "Close" : "+ Add"}
+					{isUploadFormCollapsed ? "Close" : "+ Add"}
 				</button>
 				<div className="clearfix mb-4"></div>
 				<UploadForm />
