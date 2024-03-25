@@ -1,5 +1,4 @@
 import { useMemo } from "react"
-import { useFirestoreContext } from "../context/FirestoreContext"
 import { useCreateStockMutation } from "../firebase/firestore/mutations"
 import Storage from "../handlers/storage"
 import useStore from "../store"
@@ -8,29 +7,35 @@ import Preview from "./UI/Preview"
 const { uploadFile, downloadFile } = Storage
 
 const UploadForm = () => {
-	const { state, dispatch } = useFirestoreContext()
-	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useStore()
+	const {
+		setIsUploadFormCollapsed,
+		isUploadFormCollapsed,
+		inputs,
+		setInputs,
+		setInputsToNull,
+	} = useStore()
 
 	const { mutate } = useCreateStockMutation()
 
 	const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-		dispatch({ type: "setInputs", payload: { value: e } })
+		setInputs(e)
 
 	const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		uploadFile(state.inputs.file, state.inputs.title).then(async data => {
+		uploadFile(inputs.file, inputs.title).then(async data => {
 			if (!data) return
 			const url = await downloadFile(data.path)
-			mutate({ path: url, title: state.inputs.title || "" })
+			mutate({ path: url, title: inputs.title || "" })
 			setIsUploadFormCollapsed(false)
+			setInputsToNull()
 		})
 	}
 
 	const isDisabled = useMemo(() => {
-		return !!Object.values(state.inputs).some(input => !input)
-	}, [state.inputs])
+		return !!Object.values(inputs).some(input => !input)
+	}, [inputs])
 
-	const { path: inputImgSrc } = useFirestoreContext().state.inputs
+	const { path: inputImgSrc } = inputs
 
 	return (
 		isUploadFormCollapsed && (
