@@ -10,6 +10,7 @@ type State = {
 	inputs: Inputs
 	isUploadFormCollapsed: boolean
 	setInputs: (value: React.ChangeEvent<HTMLInputElement>) => void
+	setInputsToNull: () => void
 	setIsUploadFormCollapsed: (bool: boolean) => void
 }
 
@@ -47,6 +48,11 @@ const useStore = create<State>(set => ({
 			}
 			return state
 		}),
+	setInputsToNull: () =>
+		set(state => ({
+			...state,
+			inputs: { title: null, file: null, path: null },
+		})),
 	setIsUploadFormCollapsed: bool =>
 		set(state => ({ ...state, isUploadFormCollapsed: bool })),
 }))
