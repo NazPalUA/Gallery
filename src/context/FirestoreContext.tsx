@@ -13,8 +13,6 @@ type Inputs = {
 
 type State = {
 	inputs: Inputs
-	isCollapsed: boolean
-	count: number
 }
 
 const initialState: State = {
@@ -23,8 +21,6 @@ const initialState: State = {
 		file: null,
 		path: null,
 	},
-	isCollapsed: false,
-	count: 0,
 }
 
 const handleOnChange = (
@@ -49,9 +45,6 @@ function reducer(state: State, action: Action): State {
 	switch (action.type) {
 		case "setInputs":
 			return { ...state, inputs: handleOnChange(state, action.payload.value) }
-
-		case "collapse":
-			return { ...state, isCollapsed: action.payload.bool }
 		default:
 			return state
 	}
