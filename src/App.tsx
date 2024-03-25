@@ -1,20 +1,18 @@
 import { onAuthStateChanged } from "firebase/auth"
-import { useEffect, useMemo } from "react"
+import { useEffect } from "react"
 import "./App.css"
 import Layout from "./components/Layout"
 import Card from "./components/UI/Card"
 import { useAuthContext } from "./context/AuthContext"
-import { useFirestoreContext } from "./context/FirestoreContext"
 import { auth } from "./firebase/firebase.config"
 import { useGetStocksQuery } from "./firebase/firestore/queries"
 
-function App() {
-	const { state } = useFirestoreContext()
-	const { authenticate } = useAuthContext()
+const CountMessage = ({ count }: { count: number }) => {
+	return <span>{`you have ${count} image${count > 1 ? "s" : ""}`}</span>
+}
 
-	const count = useMemo(() => {
-		return `you have ${state.count} image${state.count > 1 ? "s" : ""}`
-	}, [state.count])
+function App() {
+	const { authenticate } = useAuthContext()
 
 	useEffect(() => {
 		onAuthStateChanged(auth, user => {
@@ -32,12 +30,18 @@ function App() {
 	return (
 		<Layout>
 			<h1 className="text-center">Gallery</h1>
-			{count}
-			<div className="row">
-				{data?.map((item, index) => (
-					<Card key={index} {...item} />
-				))}
-			</div>
+			{!data ? (
+				<p className="text-center">No images found</p>
+			) : (
+				<>
+					<CountMessage count={data.length} />
+					<div className="row">
+						{data?.map((item, index) => (
+							<Card key={index} {...item} />
+						))}
+					</div>
+				</>
+			)}
 		</Layout>
 	)
 }
