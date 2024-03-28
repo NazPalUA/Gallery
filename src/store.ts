@@ -1,58 +1,20 @@
 import { create } from "zustand"
 
-type Inputs = {
-	title: string | null
-	file: File | null
-	path: string | null
-}
-
 type State = {
-	inputs: Inputs
 	isUploadFormCollapsed: boolean
-	setInputs: (value: React.ChangeEvent<HTMLInputElement>) => void
-	setInputsToNull: () => void
+	previewUrl: string | null
+	fileName: string | null
+	setFileName: (name: string | null) => void
+	setPreviewUrl: (url: string | null) => void
 	setIsUploadFormCollapsed: (bool: boolean) => void
 }
 
 const useStore = create<State>(set => ({
-	inputs: {
-		title: null,
-		file: null,
-		path: null,
-	},
 	isUploadFormCollapsed: false,
-	setInputs: value =>
-		set(state => {
-			if (value.target.name === "file") {
-				const file = value.target.files?.[0] || null
-				if (!file) {
-					return state
-				}
-				const path = URL.createObjectURL(file)
-				return {
-					...state,
-					inputs: {
-						...state.inputs,
-						file: file,
-						path: path,
-					},
-				}
-			} else if (value.target.name === "title") {
-				return {
-					...state,
-					inputs: {
-						...state.inputs,
-						title: value.target.value,
-					},
-				}
-			}
-			return state
-		}),
-	setInputsToNull: () =>
-		set(state => ({
-			...state,
-			inputs: { title: null, file: null, path: null },
-		})),
+	previewUrl: null,
+	setPreviewUrl: (url: string | null) => set({ previewUrl: url }),
+	fileName: null,
+	setFileName: (name: string | null) => set({ fileName: name }),
 	setIsUploadFormCollapsed: bool =>
 		set(state => ({ ...state, isUploadFormCollapsed: bool })),
 }))
