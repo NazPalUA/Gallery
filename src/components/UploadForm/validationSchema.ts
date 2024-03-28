@@ -23,3 +23,5 @@ export const uploadSchema = z.object({
 			"File size should be less than " + getSize(5) + "MB"
 		),
 })
+
+export type FormData = z.infer<typeof uploadSchema>
