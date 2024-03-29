@@ -5,7 +5,7 @@ import Layout from "./components/Layout"
 import Card from "./components/UI/Card"
 import { useAuthContext } from "./context/AuthContext"
 import { auth } from "./firebase/firebase.config"
-import { useGetStocksQuery } from "./firebase/firestore/queries"
+import { useGetStocksQuery } from "./firebase/firestore-database/queries"
 
 const CountMessage = ({ count }: { count: number }) => {
 	return <span>{`you have ${count} image${count > 1 ? "s" : ""}`}</span>

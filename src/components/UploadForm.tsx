@@ -1,4 +1,4 @@
-import { useCreateStockMutation } from "../firebase/firestore/mutations"
+import { useCreateStockMutation } from "../firebase/firestore-database/mutations"
 import Storage from "../handlers/storage"
 import useStore from "../store"
 import Form from "./Form/Form"
