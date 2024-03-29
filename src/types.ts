@@ -6,8 +6,3 @@ export type StockItem = {
 	createdAt: Timestamp
 	username: string
 }
-
-export type StockUploadFormInputs = {
-	title: string
-	file: File
-}
