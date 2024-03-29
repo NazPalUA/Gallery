@@ -1,20 +1,25 @@
 import { useCreateStockMutation } from "../firebase/firestore-database/mutations"
-import Storage from "../handlers/storage"
+import { useUploadFileToStorageMutation } from "../firebase/storage/mutations"
 import useStore from "../store"
 import Form from "./Form/Form"
 import Preview from "./UI/Preview"
 
 export default function UploadForm() {
-	const { mutate } = useCreateStockMutation()
-	const { uploadFile, downloadFile } = Storage
+	const { mutate: createStock } = useCreateStockMutation()
+
 	const { isUploadFormCollapsed, previewUrl } = useStore()
 
+	const { mutate: uploadToStorage } = useUploadFileToStorageMutation()
+
 	function handleOnSubmit(file: File, title: string) {
-		uploadFile(file, title).then(async data => {
-			if (!data) return
-			const url = await downloadFile(data.path)
-			mutate({ path: url, title: data.name })
-		})
+		uploadToStorage(
+			{ file, title },
+			{
+				onSuccess: async ({ name, url }) => {
+					createStock({ path: url, title: name })
+				},
+			}
+		)
 	}
 
 	return (
