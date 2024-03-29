@@ -1,4 +1,4 @@
-import useStore from "../store"
+import useAppState from "../appState"
 import Navbar from "./Navbar"
 import UploadForm from "./UploadForm"
 
@@ -7,7 +7,7 @@ type LayoutProps = {
 }
 
 export default function Layout({ children }: LayoutProps) {
-	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useStore()
+	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useAppState()
 
 	const toggle = (bool: boolean) => setIsUploadFormCollapsed(bool)
 

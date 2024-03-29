@@ -9,7 +9,7 @@ type State = {
 	setIsUploadFormCollapsed: (bool: boolean) => void
 }
 
-const useStore = create<State>(set => ({
+const useAppState = create<State>(set => ({
 	isUploadFormCollapsed: false,
 	previewUrl: null,
 	setPreviewUrl: (url: string | null) => set({ previewUrl: url }),
@@ -19,4 +19,4 @@ const useStore = create<State>(set => ({
 		set(state => ({ ...state, isUploadFormCollapsed: bool })),
 }))
 
-export default useStore
+export default useAppState

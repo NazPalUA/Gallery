@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormProvider, useForm } from "react-hook-form"
-import useStore from "../../store"
+import useAppState from "../../appState"
 
 import FileInput from "./SubComponents/FileInput"
 import SubmitButton from "./SubComponents/SubmitButton"
@@ -16,7 +16,7 @@ const Form = ({ onSubmit }: UploadFormProps) => {
 		resolver: zodResolver(uploadSchema),
 	})
 
-	const { setPreviewUrl, setFileName } = useStore()
+	const { setPreviewUrl, setFileName } = useAppState()
 
 	const { handleSubmit, reset } = methods
 

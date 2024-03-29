@@ -1,13 +1,13 @@
+import useAppState from "../appState"
 import { useCreateStockMutation } from "../firebase/firestore-database/mutations"
 import { useUploadFileToStorageMutation } from "../firebase/storage/mutations"
-import useStore from "../store"
 import Form from "./Form/Form"
 import Preview from "./UI/Preview"
 
 export default function UploadForm() {
 	const { mutate: createStock } = useCreateStockMutation()
 
-	const { isUploadFormCollapsed, previewUrl } = useStore()
+	const { isUploadFormCollapsed, previewUrl } = useAppState()
 
 	const { mutate: uploadToStorage } = useUploadFileToStorageMutation()
 

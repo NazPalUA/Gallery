@@ -1,10 +1,10 @@
 import { useDropzone } from "react-dropzone"
 import { useFormContext } from "react-hook-form"
-import useStore from "../../../store"
+import useAppState from "../../../appState"
 import { FormData } from "../validationSchema"
 
 const FileInput = () => {
-	const { previewUrl, setPreviewUrl, fileName, setFileName } = useStore()
+	const { previewUrl, setPreviewUrl, fileName, setFileName } = useAppState()
 
 	const {
 		setValue,
