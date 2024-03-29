@@ -1,6 +1,6 @@
 import Dropdown from "./Dropdown"
-import Navigation from "./Navigation"
-import SearchForm from "./SearchForm"
+import Navigation from "./UI/Navigation"
+import SearchForm from "./UI/SearchForm"
 
 function Navbar() {
 	return (
