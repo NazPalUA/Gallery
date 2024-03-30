@@ -1,10 +1,6 @@
-import { onAuthStateChanged } from "firebase/auth"
-import { useEffect } from "react"
 import "./App.css"
 import Layout from "./components/Layout"
 import Card from "./components/UI/Card"
-import { useAuthContext } from "./context/AuthContext"
-import { auth } from "./firebase/firebase.config"
 import { useGetStocksQuery } from "./firebase/firestore-database/queries"
 
 const CountMessage = ({ count }: { count: number }) => {
@@ -12,19 +8,6 @@ const CountMessage = ({ count }: { count: number }) => {
 }
 
 function App() {
-	const { authenticate } = useAuthContext()
-
-	useEffect(() => {
-		onAuthStateChanged(auth, user => {
-			if (user) {
-				authenticate(user)
-				console.log("User is signed in")
-			} else {
-				console.log("User is signed out")
-			}
-		})
-	}, [])
-
 	const { data } = useGetStocksQuery()
 
 	return (

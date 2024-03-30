@@ -1,11 +1,11 @@
 import { useMemo } from "react"
-import { useAuthContext } from "../context/AuthContext"
+import { useGetUserQuery } from "../firebase/authentication/queries"
 import LogIn from "./LogIn"
 import LogOut from "./LogOut"
 import Avatar from "./UI/Avatar"
 
 export default function Dropdown() {
-	const { currentUser } = useAuthContext()
+	const { data: currentUser } = useGetUserQuery()
 
 	const username = useMemo(() => {
 		return currentUser?.displayName || "Profile"

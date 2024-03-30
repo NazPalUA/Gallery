@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useAuthContext } from "../../context/AuthContext"
 import { getUsername } from "../../utils/getUsername"
+import { useGetUserQuery } from "../authentication/queries"
 import { addStock } from "./endPoints"
 
 type MutationInputs = {
@@ -10,14 +10,13 @@ type MutationInputs = {
 
 export const useCreateStockMutation = () => {
 	const queryClient = useQueryClient()
-	const { currentUser } = useAuthContext()
-	const username = getUsername(currentUser)
+
+	const { data: currentUser } = useGetUserQuery()
+
+	const username = getUsername(currentUser || null)
 
 	return useMutation({
 		mutationFn: (inputs: MutationInputs) => {
-			if (!username) {
-				throw new Error("User not found")
-			}
 			return addStock({ ...inputs, username: username })
 		},
 		onSuccess: () => {
