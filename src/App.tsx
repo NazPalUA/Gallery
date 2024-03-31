@@ -1,6 +1,5 @@
 import "./App.css"
-import Layout from "./components/Layout"
-import Card from "./components/UI/Card"
+import List from "./components/List"
 import { useGetStocksQuery } from "./firebase/firestore-database/queries"
 
 const CountMessage = ({ count }: { count: number }) => {
@@ -11,21 +10,17 @@ function App() {
 	const { data } = useGetStocksQuery()
 
 	return (
-		<Layout>
+		<>
 			<h1 className="text-center">Gallery</h1>
 			{!data ? (
 				<p className="text-center">No images found</p>
 			) : (
 				<>
 					<CountMessage count={data.length} />
-					<div className="row">
-						{data?.map((item, index) => (
-							<Card key={index} {...item} />
-						))}
-					</div>
+					<List items={data} />
 				</>
 			)}
-		</Layout>
+		</>
 	)
 }
 
