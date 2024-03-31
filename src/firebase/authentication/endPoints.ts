@@ -18,6 +18,9 @@ export const getCurrentUser = (): Promise<User | null> =>
 
 // MUTATIONS:
 const provider = new GoogleAuthProvider()
+provider.setCustomParameters({
+	prompt: "select_account",
+})
 
 export const loginWithGoogle = async (): Promise<User | null> => {
 	const result = await signInWithPopup(auth, provider)
