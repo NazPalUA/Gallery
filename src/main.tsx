@@ -4,13 +4,10 @@ import ReactDOM from "react-dom/client"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import App from "./App.tsx"
 import Layout from "./components/Layout.tsx"
+import Stocks from "./components/Stocks.tsx"
 import "./index.css"
 
 const queryClient = new QueryClient()
-
-function Stocks() {
-	return <h1>Stocks</h1>
-}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
