@@ -1,9 +1,9 @@
+import List from "../components/List"
+import CountMessage from "../components/UI/CountMessage"
 import { useGetUserQuery } from "../firebase/authentication/queries"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
-import List from "./List"
-import CountMessage from "./UI/CountMessage"
 
-export default function MyImages() {
+export default function MyImagesPage() {
 	const { data } = useGetStocksQuery()
 	const { data: userData } = useGetUserQuery()
 

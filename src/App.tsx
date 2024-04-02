@@ -1,23 +1,15 @@
+import { BrowserRouter } from "react-router-dom"
 import "./App.css"
-import List from "./components/List"
-import CountMessage from "./components/UI/CountMessage"
-import { useGetStocksQuery } from "./firebase/firestore-database/queries"
+import AppRoutes from "./components/AppRoutes"
+import Layout from "./components/Layout"
 
 function App() {
-	const { data } = useGetStocksQuery()
-
 	return (
-		<>
-			<h1 className="text-center">Gallery</h1>
-			{!data ? (
-				<p className="text-center">No images found</p>
-			) : (
-				<>
-					<CountMessage count={data.length} />
-					<List items={data} />
-				</>
-			)}
-		</>
+		<BrowserRouter>
+			<Layout>
+				<AppRoutes />
+			</Layout>
+		</BrowserRouter>
 	)
 }
 
