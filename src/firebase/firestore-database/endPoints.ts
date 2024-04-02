@@ -16,7 +16,10 @@ const stockRef = (id: string) => doc(db, `stocks/${id}`)
 // QUERIES:
 export const getStocks = async () => {
 	return getDocs(stocksCollection).then(stocksSnapshot => {
-		return stocksSnapshot.docs.map(doc => doc.data()) as StockItem[]
+		return stocksSnapshot.docs.map(doc => ({
+			...doc.data(),
+			stockId: doc.id,
+		})) as StockItem[]
 	})
 }
 // MUTATIONS:
