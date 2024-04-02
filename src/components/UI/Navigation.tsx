@@ -10,8 +10,8 @@ export default function Navigation() {
 				</Link>
 			</li>
 			<li className="nav-item">
-				<Link className="nav-link active" aria-current="page" to="/stocks">
-					My Stocks
+				<Link className="nav-link active" aria-current="page" to="/my-images">
+					My Images
 				</Link>
 			</li>
 		</ul>

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import App from "./App.tsx"
 import Layout from "./components/Layout.tsx"
-import Stocks from "./components/Stocks.tsx"
+import Stocks from "./components/MyImages.tsx"
 import "./index.css"
 
 const queryClient = new QueryClient()
@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<Layout>
 					<Routes>
 						<Route path="/" element={<App />} />
-						<Route path="/stocks" element={<Stocks />} />
+						<Route path="/my-images" element={<Stocks />} />
 					</Routes>
 				</Layout>
 			</Router>
