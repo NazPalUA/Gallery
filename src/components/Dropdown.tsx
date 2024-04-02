@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { Link } from "react-router-dom"
 import { useGetUserQuery } from "../firebase/authentication/queries"
 import LogIn from "./LogIn"
 import LogOut from "./LogOut"
@@ -32,9 +33,11 @@ export default function Dropdown() {
 					style={{ right: "0", left: "auto" }}
 				>
 					<li>
-						<a className="dropdown-item text-center" href="#">
-							{username}
-						</a>
+						{currentUser && (
+							<Link className="dropdown-item text-center" to="/profile">
+								{username}
+							</Link>
+						)}
 					</li>
 					<li>
 						<hr className="dropdown divider" />
