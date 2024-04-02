@@ -1,13 +1,19 @@
+import { useNavigate } from "react-router-dom"
 import { StockItem } from "../../types"
 import { getDateFromTimestamp } from "../../utils/getDateFromTimestamp"
 
 type CardProps = StockItem
 
-function Card({ path, title, createdAt, username }: CardProps) {
+function Card({ path, title, createdAt, username, stockId }: CardProps) {
+	const navigate = useNavigate()
+	const handleClick = () => {
+		navigate(`/images/${stockId}`)
+	}
+
 	const timestamp = getDateFromTimestamp(createdAt)
 
 	return (
-		<div className="col mb-5">
+		<div className="mb-5" onClick={handleClick}>
 			<div className="card" style={{ width: "18rem" }}>
 				<div
 					style={{
