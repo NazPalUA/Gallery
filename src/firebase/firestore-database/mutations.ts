@@ -17,7 +17,11 @@ export const useCreateStockMutation = () => {
 
 	return useMutation({
 		mutationFn: (inputs: MutationInputs) => {
-			return addStock({ ...inputs, username: username })
+			return addStock({
+				...inputs,
+				username: username,
+				userId: currentUser?.uid || "",
+			})
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({

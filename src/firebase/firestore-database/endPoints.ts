@@ -24,14 +24,21 @@ type AddStockInputs = {
 	title: string
 	path: string
 	username: string
+	userId: string
 }
-export const addStock = async ({ title, path, username }: AddStockInputs) => {
+export const addStock = async ({
+	title,
+	path,
+	username,
+	userId,
+}: AddStockInputs) => {
 	const stockId = nanoid()
 	const newStock = {
-		title: title,
-		path: path,
+		title,
+		path,
 		createdAt: serverTimestamp(),
-		username: username,
+		username,
+		userId,
 	}
 	return setDoc(stockRef(stockId), newStock)
 }

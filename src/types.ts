@@ -5,4 +5,5 @@ export type StockItem = {
 	path: string
 	createdAt: Timestamp
 	username: string
+	userId: string
 }
