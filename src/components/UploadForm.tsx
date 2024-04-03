@@ -7,7 +7,8 @@ import Preview from "./UI/Preview"
 export default function UploadForm() {
 	const { mutate: createStock } = useCreateStockMutation()
 
-	const { isUploadFormCollapsed, previewUrl } = useAppState()
+	const { isUploadFormCollapsed, previewUrl, setIsUploadFormCollapsed } =
+		useAppState()
 
 	const { mutate: uploadToStorage } = useUploadFileToStorageMutation()
 
@@ -17,6 +18,7 @@ export default function UploadForm() {
 			{
 				onSuccess: async ({ name, url }) => {
 					createStock({ path: url, title: name })
+					setIsUploadFormCollapsed(true)
 				},
 			}
 		)
