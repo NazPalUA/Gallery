@@ -25,7 +25,7 @@ export default function UploadForm() {
 	}
 
 	return (
-		isUploadFormCollapsed && (
+		!isUploadFormCollapsed && (
 			<>
 				<p className="display-6 text-center mb-3">Upload Stock Image</p>
 				<div className="mb-5 d-flex align-items-center justify-content-center">
