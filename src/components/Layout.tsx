@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
 					className="btn btn-success float-end"
 					onClick={() => toggle(!isUploadFormCollapsed)}
 				>
-					{isUploadFormCollapsed ? "Close" : "+ Add"}
+					{isUploadFormCollapsed ? "Add" : "+ Close"}
 				</button>
 				<div className="clearfix mb-4"></div>
 				<UploadForm />

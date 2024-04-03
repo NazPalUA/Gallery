@@ -12,7 +12,7 @@ type State = {
 }
 
 const useAppState = create<State>(set => ({
-	isUploadFormCollapsed: false,
+	isUploadFormCollapsed: true,
 	previewUrl: null,
 	searchText: null,
 	setSearchText: (text: string | null) => set({ searchText: text }),
