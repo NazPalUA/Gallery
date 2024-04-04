@@ -5,7 +5,13 @@ function getSize(sizeInMB: number): number {
 }
 
 export const uploadSchema = z.object({
-	title: z.string().min(1, "Title is required"),
+	title: z
+		.string()
+		.min(1, "Title is required")
+		.refine(
+			title => /^[a-z0-9 ]+$/i.test(title),
+			"Title can only contain alphanumeric characters and spaces"
+		),
 	file: z
 		.unknown()
 		.refine(
@@ -20,7 +26,7 @@ export const uploadSchema = z.object({
 		)
 		.refine(
 			file => file instanceof File && file.size <= getSize(5),
-			"File size should be less than " + getSize(5) + "MB"
+			"File size should be less than " + getSize(5) + "bytes"
 		),
 })
 
