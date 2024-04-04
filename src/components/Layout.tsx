@@ -14,14 +14,14 @@ export default function Layout({ children }: LayoutProps) {
 	return (
 		<>
 			<Navbar />
-			<div className="container mt-5">
+			<div className="container-lg mt-5">
 				<button
 					className="btn btn-success float-end"
 					onClick={() => toggle(!isUploadFormCollapsed)}
 				>
 					{isUploadFormCollapsed ? "Add" : "+ Close"}
 				</button>
-				<div className="clearfix mb-4"></div>
+				<div className="clearfix mb-4" />
 				<UploadForm />
 				{children}
 			</div>

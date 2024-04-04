@@ -5,7 +5,7 @@ import SearchForm from "./UI/SearchForm"
 function Navbar() {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
-			<div className="container-fluid">
+			<div className="container-lg">
 				<a className="navbar-brand" href="#">
 					⚡ Firestock
 				</a>
