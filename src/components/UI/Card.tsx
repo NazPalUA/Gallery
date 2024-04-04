@@ -13,22 +13,20 @@ function Card({ path, title, createdAt, username, stockId }: CardProps) {
 	const timestamp = getDateFromTimestamp(createdAt)
 
 	return (
-		<div className="mb-5" onClick={handleClick}>
-			<div className="card" style={{ width: "18rem" }}>
-				<div
-					style={{
-						height: "220px",
-						backgroundImage: `url(${path || ""})`,
-						backgroundSize: "cover",
-						backgroundPosition: "center",
-						backgroundRepeat: "no-repeat",
-					}}
-				/>
-				<h5 className="text-center mt-1">{title}</h5>
-				<div className="d-flex justify-content-between p-2">
-					<p>{timestamp}</p>
-					<i>@{username}</i>
-				</div>
+		<div className={`mb-5 w-100 card `} onClick={handleClick}>
+			<img
+				style={{
+					objectFit: "cover",
+					height: "350px",
+				}}
+				src={path || ""}
+				alt={title}
+				className={`img-fluid rounded-top card-image`}
+			/>
+			<h5 className="text-center mt-1">{title}</h5>
+			<div className="d-flex justify-content-between p-2">
+				<p>{timestamp}</p>
+				<i>@{username}</i>
 			</div>
 		</div>
 	)
