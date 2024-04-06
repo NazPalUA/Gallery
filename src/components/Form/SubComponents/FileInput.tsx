@@ -13,7 +13,10 @@ const FileInput = () => {
 		formState: { errors },
 	} = useFormContext<FormData>()
 
-	const { getRootProps, getInputProps } = useDropzone({
+	const { getRootProps, getInputProps, open } = useDropzone({
+		// Disable click and keydown behavior
+		noClick: true,
+		noKeyboard: true,
 		accept: {
 			"image/jpeg": [],
 			"image/png": [],
@@ -52,7 +55,11 @@ const FileInput = () => {
 					className="form-control"
 					style={{ display: "none" }}
 				/>
-				<button type="button" className="btn btn-outline-secondary">
+				<button
+					type="button"
+					className="btn btn-outline-secondary"
+					onClick={open}
+				>
 					{previewUrl ? "Change Image" : "Upload Image"}
 				</button>
 			</div>
