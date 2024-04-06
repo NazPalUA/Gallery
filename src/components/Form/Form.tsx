@@ -2,8 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { isMobile } from "react-device-detect"
 import { FormProvider, useForm } from "react-hook-form"
 import useAppState from "../../appState"
-import FileInput from "./SubComponents/FileInput"
-import MobileFileInput from "./SubComponents/MobileFileInput"
+import FileInputDesktop from "./SubComponents/FileInputDesktop"
+import FileInputMobile from "./SubComponents/FileInputMobile"
 import SubmitButton from "./SubComponents/SubmitButton"
 import TextInput from "./SubComponents/TextInput"
 import { FormData, uploadSchema } from "./validationSchema"
@@ -40,7 +40,7 @@ const Form = ({ onSubmit }: UploadFormProps) => {
 		<FormProvider {...methods}>
 			<form onSubmit={handleSubmit(onSubmitForm)}>
 				<TextInput />
-				{isMobile ? <MobileFileInput /> : <FileInput />}
+				{isMobile ? <FileInputMobile /> : <FileInputDesktop />}
 				<SubmitButton />
 			</form>
 		</FormProvider>

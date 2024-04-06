@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form"
 import useAppState from "../../../appState"
 import { FormData } from "../validationSchema"
 
-const FileInput = () => {
+const FileInputDesktop = () => {
 	const { previewUrl, setPreviewUrl } = useAppState()
 
 	const {
@@ -82,4 +82,4 @@ const FileInput = () => {
 	)
 }
 
-export default FileInput
+export default FileInputDesktop
