@@ -6,12 +6,16 @@ export const useGetStocksQuery = (searchText?: string) => {
 		queryKey: ["stocks", searchText],
 		queryFn: async () => {
 			const data = await getStocks()
+			const sortedData = data.sort(
+				(a, b) =>
+					b.createdAt.toDate().getTime() - a.createdAt.toDate().getTime()
+			)
 			if (searchText) {
-				return data.filter(item =>
+				return sortedData.filter(item =>
 					item.title.toLowerCase().includes(searchText.toLowerCase())
 				)
 			} else {
-				return data
+				return sortedData
 			}
 		},
 	})
