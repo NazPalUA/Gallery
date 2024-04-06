@@ -28,7 +28,7 @@ export default function UploadForm() {
 		!isUploadFormCollapsed && (
 			<>
 				<p className="display-6 text-center mb-3">Upload Stock Image</p>
-				<div className="mb-5 d-flex align-items-center justify-content-center">
+				<div className="mb-5 d-flex flex-column flex-sm-row align-items-center justify-content-center">
 					<Preview path={previewUrl} />
 					<Form onSubmit={handleOnSubmit} />
 				</div>
