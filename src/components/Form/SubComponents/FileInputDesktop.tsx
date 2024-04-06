@@ -60,7 +60,7 @@ const FileInputDesktop = () => {
 					type="text"
 					className="form-control"
 					placeholder="Choose image..."
-					value={file ? file[0]?.name : ""}
+					value={file && file[0] ? file[0].name : ""}
 					readOnly
 				/>
 				<input
