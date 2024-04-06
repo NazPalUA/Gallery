@@ -15,17 +15,21 @@ export const uploadSchema = z.object({
 	file: z
 		.unknown()
 		.refine(
-			file => file instanceof File,
+			file => file instanceof FileList && file.length > 0,
 			"Image is required (jpeg, png or gif)"
 		)
 		.refine(
 			file =>
-				file instanceof File &&
-				["image/jpeg", "image/png", "image/gif"].includes(file.type),
+				file instanceof FileList &&
+				file.length > 0 &&
+				["image/jpeg", "image/png", "image/gif"].includes(file[0].type),
 			"Invalid file type. Only jpeg, png, gif are allowed"
 		)
 		.refine(
-			file => file instanceof File && file.size <= getSize(5),
+			file =>
+				file instanceof FileList &&
+				file.length > 0 &&
+				file[0].size <= getSize(5),
 			"File size should be less than " + getSize(5) + "bytes"
 		),
 })

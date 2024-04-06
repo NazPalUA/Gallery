@@ -1,17 +1,25 @@
+import { useEffect } from "react"
 import { useFormContext } from "react-hook-form"
 import useAppState from "../../../appState"
 import { FormData } from "../validationSchema"
 
 const FileInput = () => {
-	const { previewUrl } = useAppState()
+	const { previewUrl, setPreviewUrl } = useAppState()
 
 	const {
 		register,
-		getValues,
+		watch,
 		formState: { errors },
 	} = useFormContext<FormData>()
 
-	const file = getValues().file as File
+	const file = watch("file") as FileList | undefined
+
+	useEffect(() => {
+		if (file && file.length > 0) {
+			const selectedFile = file[0]
+			setPreviewUrl(URL.createObjectURL(selectedFile))
+		}
+	}, [file, setPreviewUrl])
 
 	return (
 		<div className="mb-3">
@@ -20,7 +28,7 @@ const FileInput = () => {
 					type="text"
 					className="form-control"
 					placeholder="Choose image..."
-					value={file?.name || ""}
+					value={file ? file[0]?.name : ""}
 					readOnly
 				/>
 				<input

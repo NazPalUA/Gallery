@@ -17,17 +17,22 @@ const Form = ({ onSubmit }: UploadFormProps) => {
 		resolver: zodResolver(uploadSchema),
 	})
 
-	const { setPreviewUrl, setFileName } = useAppState()
+	const { setPreviewUrl } = useAppState()
 
 	const { handleSubmit, reset } = methods
 
 	const onSubmitForm = async (data: FormData) => {
-		if (!data.file || !(data.file instanceof File)) return
+		if (
+			!data.file ||
+			!(data.file instanceof FileList) ||
+			data.file.length === 0
+		)
+			return
 		else {
-			await onSubmit(data.file, data.title)
+			const file = data.file[0]
+			await onSubmit(file, data.title)
 			reset()
 			setPreviewUrl(null)
-			setFileName(null)
 		}
 	}
 
