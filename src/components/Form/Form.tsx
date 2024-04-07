@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { isMobile } from "react-device-detect"
 import { FormProvider, useForm } from "react-hook-form"
-import useAppState from "../../appState"
 import FileInputDesktop from "./SubComponents/FileInputDesktop"
 import FileInputMobile from "./SubComponents/FileInputMobile"
 import SubmitButton from "./SubComponents/SubmitButton"
@@ -17,8 +16,6 @@ const Form = ({ onSubmit }: UploadFormProps) => {
 		resolver: zodResolver(uploadSchema),
 	})
 
-	const { setPreviewUrl } = useAppState()
-
 	const { handleSubmit, reset } = methods
 
 	const onSubmitForm = async (data: FormData) => {
@@ -32,7 +29,6 @@ const Form = ({ onSubmit }: UploadFormProps) => {
 			const file = data.file[0]
 			await onSubmit(file, data.title)
 			reset()
-			setPreviewUrl(null)
 		}
 	}
 
