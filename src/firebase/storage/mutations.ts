@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
+import { useGetUserQuery } from "../authentication/queries"
 import { uploadFileToStorage } from "./endPoints"
 
 export const useUploadFileToStorageMutation = () => {
@@ -6,10 +7,10 @@ export const useUploadFileToStorageMutation = () => {
 		title: string
 		file: File
 	}
-
+	const { data: userData } = useGetUserQuery()
 	return useMutation({
-		mutationFn: (inputs: MutationInputs) => {
-			return uploadFileToStorage(inputs)
+		mutationFn: ({ title, file }: MutationInputs) => {
+			return uploadFileToStorage({ title: title + userData?.uid, file })
 		},
 	})
 }
