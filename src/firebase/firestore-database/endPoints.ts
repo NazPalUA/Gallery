@@ -1,5 +1,6 @@
 import {
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	serverTimestamp,
@@ -28,12 +29,14 @@ type AddStockInputs = {
 	path: string
 	username: string
 	userId: string
+	storagePath: string
 }
 export const addStock = async ({
 	title,
 	path,
 	username,
 	userId,
+	storagePath,
 }: AddStockInputs) => {
 	const stockId = nanoid()
 	const newStock = {
@@ -42,6 +45,11 @@ export const addStock = async ({
 		createdAt: serverTimestamp(),
 		username,
 		userId,
+		storagePath,
 	}
 	return setDoc(stockRef(stockId), newStock)
+}
+
+export const deleteStock = async (stockId: string) => {
+	return deleteDoc(stockRef(stockId))
 }

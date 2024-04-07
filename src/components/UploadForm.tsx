@@ -22,8 +22,8 @@ export default function UploadForm() {
 		uploadToStorage(
 			{ file, title },
 			{
-				onSuccess: async ({ name, url }) => {
-					createStock({ path: url, title: name })
+				onSuccess: async ({ url, storagePath }) => {
+					createStock({ path: url, title, storagePath })
 				},
 				onSettled: () => {
 					setIsUploadFormCollapsed(true)

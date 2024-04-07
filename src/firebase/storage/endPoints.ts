@@ -1,4 +1,9 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import {
+	deleteObject,
+	getDownloadURL,
+	ref,
+	uploadBytes,
+} from "firebase/storage"
 import { storage } from "../firebase.config"
 
 // QUERIES:
@@ -10,7 +15,13 @@ type Inputs = {
 }
 export const uploadFileToStorage = async ({ title, file }: Inputs) => {
 	const fileRef = ref(storage, `images/${title}`)
+
 	return uploadBytes(fileRef, file)
 		.then(snapshot => getDownloadURL(ref(storage, snapshot.metadata.fullPath)))
-		.then(url => ({ url, name: title }))
+		.then(url => ({ url, name: title, storagePath: `images/${title}` }))
+}
+
+export const deleteFileFromStorage = async (path: string) => {
+	const fileRef = ref(storage, path)
+	deleteObject(fileRef)
 }
