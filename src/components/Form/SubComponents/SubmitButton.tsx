@@ -1,6 +1,3 @@
-// import { useFormContext } from "react-hook-form"
-// import { FormData } from "../validationSchema"
-
 import useAppState from "../../../appState"
 
 const SubmitButton = () => {
