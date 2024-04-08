@@ -1,6 +1,7 @@
 import useAppState from "../appState"
 import List from "../components/List"
 import CountMessage from "../components/UI/CountMessage"
+import UploadForm from "../components/UploadForm"
 import { useGetUserQuery } from "../firebase/authentication/queries"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
 
@@ -13,6 +14,7 @@ export default function MyImagesPage() {
 
 	return (
 		<>
+			<UploadForm />
 			<h1 className="text-center">My Images</h1>
 			{!filteredData ? (
 				<p className="text-center">No images found</p>

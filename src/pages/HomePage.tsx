@@ -1,6 +1,7 @@
 import useAppState from "../appState"
 import List from "../components/List"
 import CountMessage from "../components/UI/CountMessage"
+import UploadForm from "../components/UploadForm"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
 
 function HomePage() {
@@ -9,6 +10,7 @@ function HomePage() {
 
 	return (
 		<>
+			<UploadForm />
 			<h1 className="text-center">Gallery</h1>
 			{!data ? (
 				<p className="text-center">No images found</p>
