@@ -15,7 +15,7 @@ export default function SingleImagePage() {
 				Back
 			</button>
 			<div className="d-flex justify-content-center mb-5">
-				{item && <Card {...item} />}
+				{item && <Card {...item} maxHeight={true} />}
 			</div>
 		</>
 	)
