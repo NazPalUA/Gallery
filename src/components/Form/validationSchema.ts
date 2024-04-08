@@ -1,8 +1,7 @@
 import { z } from "zod"
 
-function getSize(sizeInMB: number): number {
-	return sizeInMB * 1024 * 1024
-}
+const maxMB = 12
+const maxB = 1024 * 1024 * maxMB
 
 export const uploadSchema = z.object({
 	title: z
@@ -27,10 +26,8 @@ export const uploadSchema = z.object({
 		)
 		.refine(
 			file =>
-				file instanceof FileList &&
-				file.length > 0 &&
-				file[0].size <= getSize(5),
-			"File size should be less than " + getSize(5) + "bytes"
+				file instanceof FileList && file.length > 0 && file[0].size <= maxB,
+			"File size should be less than " + maxMB + "mb"
 		),
 })
 
