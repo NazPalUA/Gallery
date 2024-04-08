@@ -5,11 +5,14 @@ export default function UploadFormToggleButton() {
 
 	const toggle = (bool: boolean) => setIsUploadFormCollapsed(bool)
 	return (
-		<button
-			className="btn btn-success float-end"
-			onClick={() => toggle(!isUploadFormCollapsed)}
-		>
-			{isUploadFormCollapsed ? "Add" : "+ Close"}
-		</button>
+		<>
+			<button
+				className="btn btn-success float-end"
+				onClick={() => toggle(!isUploadFormCollapsed)}
+			>
+				{isUploadFormCollapsed ? "Add" : "+ Close"}
+			</button>
+			<div className="clearfix mb-4" />
+		</>
 	)
 }
