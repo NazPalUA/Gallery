@@ -1,4 +1,5 @@
 import { useGetUserQuery } from "../firebase/authentication/queries"
+import { getUsername } from "../utils/getUsername"
 
 export default function ProfilePage() {
 	const { data: currentUser } = useGetUserQuery()
@@ -21,17 +22,12 @@ export default function ProfilePage() {
 						{currentUser?.displayName}
 					</li>
 					<li className="list-group-item">
+						<span className="fs-5 text-capitalize">nickname:</span>{" "}
+						{currentUser ? getUsername(currentUser) : "anonymous"}
+					</li>
+					<li className="list-group-item">
 						<span className="fs-5 text-capitalize">email:</span>{" "}
 						{currentUser?.email}{" "}
-					</li>
-					<li className="list-group-item">
-						<span className="fs-5 text-capitalize"></span> ---{" "}
-					</li>
-					<li className="list-group-item">
-						<span className="fs-5 text-capitalize"></span> ---{" "}
-					</li>
-					<li className="list-group-item">
-						<span className="fs-5 text-capitalize"></span> ---{" "}
 					</li>
 				</ul>
 			</div>
