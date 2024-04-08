@@ -1,17 +1,13 @@
-import useAppState from "../appState"
 import { useGetUserQuery } from "../firebase/authentication/queries"
 import Navbar from "./Navbar"
 import UploadForm from "./UploadForm"
+import UploadFormToggleButton from "./UploadFormToggleButton"
 
 type LayoutProps = {
 	children: React.ReactNode
 }
 
 export default function Layout({ children }: LayoutProps) {
-	const { setIsUploadFormCollapsed, isUploadFormCollapsed } = useAppState()
-
-	const toggle = (bool: boolean) => setIsUploadFormCollapsed(bool)
-
 	const { data: user } = useGetUserQuery()
 
 	return (
@@ -20,12 +16,7 @@ export default function Layout({ children }: LayoutProps) {
 			<div className="container-lg mt-5">
 				{user && (
 					<>
-						<button
-							className="btn btn-success float-end"
-							onClick={() => toggle(!isUploadFormCollapsed)}
-						>
-							{isUploadFormCollapsed ? "Add" : "+ Close"}
-						</button>
+						<UploadFormToggleButton />
 						<div className="clearfix mb-4" />
 						<UploadForm />
 					</>
