@@ -1,32 +1,22 @@
+import Container from "react-bootstrap/Container"
+import BtNavbar from "react-bootstrap/Navbar"
 import Dropdown from "./Dropdown"
 import Navigation from "./UI/Navigation"
 import SearchForm from "./UI/SearchForm"
 
 function Navbar() {
-	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
-			<div className="container-lg">
-				<a className="navbar-brand" href="#">
-					⚡ Firestock
-				</a>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span className="navbar-toggler-icon"></span>
-				</button>
-				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<Navigation />
-					<SearchForm />
-					<Dropdown />
-				</div>
-			</div>
-		</nav>
-	)
+  return (
+    <BtNavbar expand="lg" className="bg-body-tertiary">
+      <Container>
+        <BtNavbar.Brand>⚡ Firestock</BtNavbar.Brand>
+        <BtNavbar.Toggle aria-controls="basic-navbar-nav" />
+        <BtNavbar.Collapse id="basic-navbar-nav">
+          <Navigation />
+          <SearchForm />
+          <Dropdown />
+        </BtNavbar.Collapse>
+      </Container>
+    </BtNavbar>
+  )
 }
 export default Navbar
