@@ -1,21 +1,19 @@
+import { Button } from "react-bootstrap"
 import useAppState from "../../../appState"
 
 const SubmitButton = () => {
-	const { isUploadFormSubmitting } = useAppState()
+  const { isUploadFormSubmitting } = useAppState()
 
-	return isUploadFormSubmitting ? (
-		<button className="btn btn-success float-end" type="button" disabled>
-			<span
-				className="spinner-border spinner-border-sm"
-				aria-hidden="true"
-			></span>
-			<span role="status"> Loading...</span>
-		</button>
-	) : (
-		<button type="submit" className="btn btn-success  float-end">
-			Submit
-		</button>
-	)
+  return (
+    <Button
+      variant="success"
+      className="float-end"
+      disabled={isUploadFormSubmitting}
+      type="submit"
+    >
+      {isUploadFormSubmitting ? "Loading…" : "Submit"}
+    </Button>
+  )
 }
 
 export default SubmitButton
