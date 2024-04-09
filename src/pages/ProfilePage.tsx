@@ -8,7 +8,7 @@ export default function ProfilePage() {
     <>
       <h1 className="text-center">Profile</h1>
       <hr style={{ width: "50%", margin: "3rem auto" }} />
-      <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
+      <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mb-3">
         <img
           className=" mb-3 mb-md-0"
           style={{ borderRadius: "4px " }}
