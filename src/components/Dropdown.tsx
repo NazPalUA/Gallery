@@ -2,8 +2,7 @@ import { useMemo } from "react"
 import { NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useGetUserQuery } from "../firebase/authentication/queries"
-import LogIn from "./LogIn"
-import LogOut from "./LogOut"
+import AuthBtn from "./AuthBtn"
 import Avatar from "./UI/Avatar"
 
 export default function Dropdown() {
@@ -29,8 +28,7 @@ export default function Dropdown() {
       </NavDropdown.ItemText>
       <NavDropdown.Divider />
       <NavDropdown.ItemText>
-        <LogIn />
-        <LogOut />
+        <AuthBtn />
       </NavDropdown.ItemText>
     </NavDropdown>
   )
