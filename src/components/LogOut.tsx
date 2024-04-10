@@ -1,15 +1,16 @@
-import { useLogoutMutation } from "../firebase/authentication/mutations"
+import { Button } from "react-bootstrap"
+import { useLoginMutation } from "../firebase/authentication/mutations"
 import { useGetUserQuery } from "../firebase/authentication/queries"
 
-export default function LogOut() {
-	const { data: currentUser } = useGetUserQuery()
+export default function LogIn() {
+  const { data: currentUser } = useGetUserQuery()
 
-	const { mutate: logout } = useLogoutMutation()
-	return (
-		!!currentUser && (
-			<button type="button" className="btn btn-danger" onClick={() => logout()}>
-				Logout
-			</button>
-		)
-	)
+  const { mutate: login } = useLoginMutation()
+  return (
+    !currentUser && (
+      <Button variant="warning" onClick={() => login()}>
+        Login
+      </Button>
+    )
+  )
 }
