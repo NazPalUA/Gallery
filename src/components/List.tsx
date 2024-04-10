@@ -1,21 +1,25 @@
+import { Col, Row } from "react-bootstrap"
 import { StockItem } from "../types"
 import Card from "./UI/Card"
 
 type ListProps = {
-	items: StockItem[] | undefined
+  items: StockItem[] | undefined
 }
 
 export default function List({ items }: ListProps) {
-	return (
-		<div className="row mt-3">
-			{items?.map(item => (
-				<div
-					key={item.createdAt.toString()}
-					className="col-12 col-sm-6 col-lg-4 mb-5"
-				>
-					<Card {...item} />
-				</div>
-			))}
-		</div>
-	)
+  return (
+    <Row className="mt-3">
+      {items?.map((item) => (
+        <Col
+          key={item.createdAt.toString()}
+          xs={12}
+          sm={6}
+          lg={4}
+          className="mb-5"
+        >
+          <Card {...item} />
+        </Col>
+      ))}
+    </Row>
+  )
 }
