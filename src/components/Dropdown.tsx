@@ -20,18 +20,18 @@ export default function Dropdown() {
       align={{ lg: "end" }}
       className="p-2"
     >
-      <NavDropdown.Item>
+      <NavDropdown.ItemText>
         {userData && (
           <Link className="dropdown-item text-center" to="/profile">
             {username}
           </Link>
         )}
-      </NavDropdown.Item>
+      </NavDropdown.ItemText>
       <NavDropdown.Divider />
-      <NavDropdown.Item>
+      <NavDropdown.ItemText>
         <LogIn />
         <LogOut />
-      </NavDropdown.Item>
+      </NavDropdown.ItemText>
     </NavDropdown>
   )
 }
