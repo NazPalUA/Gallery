@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap"
-import { StockItem } from "../types"
-import Card from "./UI/Card"
+import { StockItem } from "../../types"
+import Card from "../Card"
 
 type ListProps = {
   items: StockItem[] | undefined

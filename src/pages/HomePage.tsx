@@ -1,7 +1,7 @@
 import useAppState from "../appState"
-import List from "../components/List"
-import LoadingSpinner from "../components/LoadingSpinner"
 import CountMessage from "../components/UI/CountMessage"
+import List from "../components/UI/List"
+import LoadingSpinner from "../components/UI/LoadingSpinner"
 import UploadForm from "../components/UploadForm"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
 

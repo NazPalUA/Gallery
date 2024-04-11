@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { useGetUserQuery } from "../../firebase/authentication/queries"
-import { useDeleteStockMutation } from "../../firebase/firestore-database/mutations"
-import { useDeleteFileFromStorageMutation } from "../../firebase/storage/mutations"
-import { StockItem } from "../../types"
-import { getDateFromTimestamp } from "../../utils/getDateFromTimestamp"
+import { useGetUserQuery } from "../firebase/authentication/queries"
+import { useDeleteStockMutation } from "../firebase/firestore-database/mutations"
+import { useDeleteFileFromStorageMutation } from "../firebase/storage/mutations"
+import { StockItem } from "../types"
+import { getDateFromTimestamp } from "../utils/getDateFromTimestamp"
 
 type CardProps = StockItem & { maxHeight?: boolean }
 

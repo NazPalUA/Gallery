@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent } from "react"
 import { Button, Form, FormControl } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import useAppState from "../../appState"
+import useAppState from "../appState"
 
 export default function SearchForm() {
   const { searchText, setSearchText } = useAppState()

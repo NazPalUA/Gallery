@@ -1,6 +1,6 @@
 import { Nav, Navbar } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
-import { useGetUserQuery } from "../../firebase/authentication/queries"
+import { useGetUserQuery } from "../firebase/authentication/queries"
 
 export default function Navigation() {
   const { data: userData } = useGetUserQuery()
