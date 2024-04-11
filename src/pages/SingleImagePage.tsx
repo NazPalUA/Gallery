@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
-import Card from "../components/Card"
+import Card from "../components/Card/Card"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
 
 export default function SingleImagePage() {
