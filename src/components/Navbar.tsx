@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container"
 import BtNavbar from "react-bootstrap/Navbar"
 import Dropdown from "./Dropdown"
-import Navigation from "./Navigation"
+import Navigation from "./Navigation/Navigation"
 import SearchForm from "./SearchForm"
 
 function Navbar() {
