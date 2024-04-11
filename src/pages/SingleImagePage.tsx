@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 import Card from "../components/Card/Card"
 import { useGetStocksQuery } from "../firebase/firestore-database/queries"
@@ -11,9 +12,9 @@ export default function SingleImagePage() {
 
   return (
     <>
-      <button className="btn btn-link" onClick={() => navigate(-1)}>
+      <Button variant="link" onClick={() => navigate(-1)}>
         Back
-      </button>
+      </Button>
       <div className="d-flex justify-content-center mb-5">
         {item && <Card {...item} maxHeight={true} />}
       </div>
